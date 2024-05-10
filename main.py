@@ -51,19 +51,51 @@ class myTime:
     def __str__(self):
         return self.turnTimeFormat(self.timeStamp)
 
-    def __add__(self,other):
+    def __add__(self, other):
         return self.turnTimeFormat(self.timeStamp + other.timeStamp)
-    def __sub__(self,other):
+
+    def __sub__(self, other):
         return self.turnTimeFormat(self.timeStamp - other.timeStamp)
-    def __mul__(self,other):
-        if hasattr(other,"timeStamp"): return self.turnTimeFormat(self.timeStamp * other.timeStamp)
+
+    def __mul__(self, other):
+        if hasattr(other, "timeStamp"):
+            return self.turnTimeFormat(self.timeStamp * other.timeStamp)
         return self.turnTimeFormat(self.timeStamp * other)
 
-firsInterval = myTime(21,58,50)
-secondInterval = myTime(1,45,22)
+
+firsInterval = myTime(21, 58, 50)
+secondInterval = myTime(1, 45, 22)
 
 print(firsInterval)
 print(secondInterval)
 print(firsInterval + secondInterval)
 print(firsInterval - secondInterval)
 print(firsInterval * 2)
+
+# Scenario
+# Extend the class implementation prepared in the previous lab to support the addition and subtraction of integers to time interval objects;
+# to add an integer to a time interval object means to add seconds;
+# to subtract an integer from a time interval object means to remove seconds.
+
+# Test data:
+
+# the time interval (tti) is hours=21, minutes=58, seconds=50
+# the expected result of addition (tti + 62) is 21:59:52
+# the expected result of subtraction (tti - 62) is 21:57:48
+#############################################################################################################################
+
+
+class myTime2(myTime):
+    def __add__(self, other):
+        if hasattr(other, "timeStamp"):
+            return self.turnTimeFormat(self.timeStamp + other.timeStamp)
+        return self.turnTimeFormat(self.timeStamp + other)
+    def __sub__(self, other):
+        if hasattr(other, "timeStamp"):
+            return self.turnTimeFormat(self.timeStamp - other.timeStamp)
+        return self.turnTimeFormat(self.timeStamp - other)
+    
+    
+timeInterval = myTime2(21,58,50)
+print(timeInterval + 62)
+print(timeInterval - 62)
